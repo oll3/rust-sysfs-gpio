@@ -82,11 +82,11 @@ The following features are planned for the library:
 - [x] Support for configuring interrupts on GPIO
 - [x] Support for polling on GPIO with configured interrupt
 - [x] Support for asynchronous polling using `mio` or `tokio` (requires
-      enabling the `mio-evented` or `use_tokio` crate features, respectively)
+      enabling the `mio-evented` or `async-tokio` crate features, respectively)
 
 ## Minimum Supported Rust Version (MSRV)
 
-This crate is guaranteed to compile on stable Rust 1.31 and up.  It *might*
+This crate is guaranteed to compile on stable Rust 1.46.0 and up.  It *might*
 compile with older versions but that may change in any new patch release.
 
 ## Cross Compiling

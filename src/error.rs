@@ -17,15 +17,6 @@ pub enum Error {
 }
 
 impl ::std::error::Error for Error {
-    fn description(&self) -> &str {
-        match *self {
-            Error::Io(ref e) => e.description(),
-            Error::Unexpected(_) => "An Unexpected Error Occurred",
-            Error::InvalidPath(_) => "A Provided Path was invalid",
-            Error::Unsupported(_) => "Operation is not supported on target os",
-        }
-    }
-
     fn cause(&self) -> Option<&dyn std::error::Error> {
         match *self {
             Error::Io(ref e) => Some(e),
@@ -53,9 +44,6 @@ impl convert::From<io::Error> for Error {
 #[cfg(not(target_os = "wasi"))]
 impl convert::From<nix::Error> for Error {
     fn from(e: nix::Error) -> Error {
-        match e {
-            nix::Error::Sys(errno) => Error::Io(errno.into()),
-            other => Error::Unexpected(format!("{:?}", other)), // should just be dealing with errno case
-        }
+        Error::Io(e.into())
     }
 }
